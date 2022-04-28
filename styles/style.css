@@ -1,17 +1,30 @@
 body {
     background-color: rgb(0, 0, 0);
 }
+a {
+    text-decoration: none;
+    color: rgb(238, 255, 0);
+    text-shadow: 0px 1px 15px rgb(238, 255, 0);
+    font-size: 40px;
+    padding: 10px;
+    border: 2px solid rgb(238, 255, 0);
+    border-radius: 40px;
+}
 .wrapper {
     display: flex;
     justify-content: center;
+    color: rgb(238, 255, 0);
+    text-shadow: 0px 1px 15px rgb(238, 255, 0);
+    font-family: monospace;
 }
 .monitor {
     position: absolute;
-    z-index: 5;
+    z-index: 6;
 }
 .monitor-im {
     position: absolute;
     width: 800px;
+    z-index: 5;
 }
 .display {
     position: relative;
@@ -27,7 +40,8 @@ body {
 .display-container {
     position: relative;
     height: 95%;
-    overflow-y: scroll;
+    overflow: hidden;
+    /* overflow-y: scroll; */
 }
 .display-container::-webkit-scrollbar-thumb {
     background-color: rgba(125, 134, 0, 0.458);
@@ -37,7 +51,10 @@ body {
     background-color: rgba(46, 46, 46, 0.71);
 }
 .text {
+    display: flex;
+    flex-direction: column;
     margin: 15px;
+    align-items: center;
     color: rgb(238, 255, 0);
     text-shadow: 0px 1px 15px rgb(238, 255, 0);
     font-family: monospace;
@@ -58,6 +75,7 @@ body {
     background-color: rgb(18, 18, 18);
     box-shadow: 0px 1px 15px rgba(238, 255, 0, 0.123);
     opacity: .5;
+    z-index: 9;
     animation: cover 7s linear infinite;
 }
 @keyframes cover {
@@ -68,12 +86,72 @@ body {
         transform: translateY(350px);
     }
 }
-.audio {
+.soundbutton {
     position: relative;
     width: 28px;
     top: 11%;
     left:80%;
     opacity: .8;
-
+    cursor: pointer;
+    transition: .3s ease;
+}
+.soundbutton.paused {
+    opacity: .3;
 }
 
+.text-input {
+    background-color: rgb(18, 18, 18);
+    text-shadow: 0px 1px 15px rgb(238, 255, 0);
+    font-family: monospace;
+    font-size: 17px;
+    color: rgb(238, 255, 0);
+    outline: none;
+    border: none;
+    cursor: none;
+    overflow: hidden;
+}
+
+
+
+.button {
+    margin-top: 80px;
+}
+#lexx {
+    width: 120px;
+    height: 40px;
+    /* background-image: url("/img/lexx.png"); */
+    background-size: 120px 40px;
+    position: relative;
+    top: 35px;
+    left: -170px;
+    z-index: 6;
+    transition: all 1s;
+}
+/* #lexx {
+    position: relative;
+    height: 40px;
+    width: 130px;
+    background-size: 130px, 40px;
+    top: 100px;
+    right: 150px;
+
+} */
+.planet {
+    position: relative;
+    width: 100px;
+    top: 30px;
+    right: -150px;
+
+}
+.fireshot {
+    width: 24px;
+    height: 24px;
+    /* background-size: 24px ,24px; */
+    overflow: hidden;
+    position: absolute;
+    top: 40%;
+    left: 330px;
+    background-image: url(/img/fire.png);
+    z-index: 6;
+    /* transition: all 1s; */
+}
