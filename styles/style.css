@@ -1,5 +1,7 @@
 body {
     background-color: rgb(0, 0, 0);
+    overflow: hidden;
+
 }
 a {
     text-decoration: none;
@@ -7,7 +9,7 @@ a {
     text-shadow: 0px 1px 15px rgb(238, 255, 0);
     font-size: 40px;
     padding: 10px;
-    border: 2px solid rgb(238, 255, 0);
+    /* border: 2px solid rgb(238, 255, 0); */
     border-radius: 40px;
 }
 .wrapper {
@@ -18,7 +20,7 @@ a {
     font-family: monospace;
 }
 .monitor {
-    position: absolute;
+    /* position: relative; */
     z-index: 6;
 }
 .monitor-im {
@@ -40,7 +42,9 @@ a {
 .display-container {
     position: relative;
     height: 95%;
+    width: 95%;
     overflow: hidden;
+    z-index: 3;
     /* overflow-y: scroll; */
 }
 .display-container::-webkit-scrollbar-thumb {
@@ -89,11 +93,12 @@ a {
 .soundbutton {
     position: relative;
     width: 28px;
-    top: 11%;
-    left:80%;
+    top: 145px;
+    left: 520px;
     opacity: .8;
     cursor: pointer;
     transition: .3s ease;
+    z-index: 9;
 }
 .soundbutton.paused {
     opacity: .3;
@@ -115,43 +120,48 @@ a {
 
 .button {
     margin-top: 80px;
+    z-index: 50;
 }
 #lexx {
+    position: absolute;
     width: 120px;
     height: 40px;
     /* background-image: url("/img/lexx.png"); */
-    background-size: 120px 40px;
-    position: relative;
-    top: 35px;
-    left: -170px;
+    /* background-size: 120px 40px; */
+    top: 145px;
+    left: 10px;
     z-index: 6;
     transition: all 1s;
 }
-/* #lexx {
-    position: relative;
-    height: 40px;
-    width: 130px;
-    background-size: 130px, 40px;
-    top: 100px;
-    right: 150px;
 
-} */
 .planet {
-    position: relative;
+    position: absolute;
+    background-image: url("./img/planet.png");
+    height: 100px;
     width: 100px;
-    top: 30px;
-    right: -150px;
-
+    background-size: 100px 100px;
+    top: 120px;
+    left: 350px;
+    z-index: 50;
+    transition: all .5s;
 }
 .fireshot {
-    width: 24px;
-    height: 24px;
-    /* background-size: 24px ,24px; */
-    overflow: hidden;
     position: absolute;
-    top: 40%;
-    left: 330px;
-    background-image: url(./img/fire.png);
-    z-index: 6;
+    width: 8px;
+    height: 8px;
+    background-color: rgb(255, 234, 0);
+    box-shadow: 0px 1px 10px rgb(238, 255, 0);
+    border-radius: 50%;
+    z-index: 50;
     /* transition: all 1s; */
+}
+
+.boom {
+    position: absolute;
+    background-image: url("./media/boom.gif");
+    height: 100px;
+    width: 100px;
+    background-size: 100px 100px;
+    z-index: 50;
+    transition: all 1s;
 }
