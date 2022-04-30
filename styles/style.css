@@ -136,7 +136,7 @@ a {
 
 .planet {
     position: absolute;
-    background-image: url("./img/planet.png");
+    background-image: url("../img/planet.png");
     height: 100px;
     width: 100px;
     background-size: 100px 100px;
@@ -158,7 +158,7 @@ a {
 
 .boom {
     position: absolute;
-    background-image: url("./media/boom.gif");
+    background-image: url("../media/boom.gif");
     height: 100px;
     width: 100px;
     background-size: 100px 100px;
