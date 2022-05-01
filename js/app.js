@@ -12,28 +12,81 @@ soundButton.addEventListener('click', e => {
 
 
 //game
+//score
+let scoreBlock = document.querySelector('.game-score .score-count');
+
+let score = 0;
+
+function incScore() {
+    score++;
+    drawScore();
+}
+function drawScore() {
+    scoreBlock.innerHTML = score;
+}
+
+drawScore();
+
+
+
 //create LEXX-------------------------------------------
 
+createLexx();
+
+createPlanet();
 
 
-let lexx = document.getElementById("lexx");
+function createLexx() {
+    const lexx = document.getElementById("lexx");
+    lives = 3;
 
-document.addEventListener("keydown", function(event) {
-    
-    switch(event.key) {
-        case "ArrowUp":
-            lexx.style.top = lexx.offsetTop - 30 + "px";
-            break;
 
-        case "ArrowDown":
-            lexx.style.top = lexx.offsetTop + 30 + "px";
-            break;
+    // lexx.offsetTop 
 
-        case " ":
+    document.addEventListener("keydown", function(event) {
+        let display = document.getElementById("display-container");
+        switch(event.key) {
+            case " ":
                 createFireshot();
                 break;
+
+            case "ArrowUp":
+                if(lexx.offsetTop > display.offsetTop) {
+                lexx.style.top = lexx.offsetTop - 30 + "px";
+                break;
+                }
+
+            case "ArrowDown":
+                if(lexx.offsetTop + lexx.offsetHeight < display.offsetHeight) {
+                lexx.style.top = lexx.offsetTop + 30 + "px";
+                break;
+                }
+        }
+    });
+}
+
+const upper = document.querySelector('.key-up');
+upper.addEventListener("mousedown", function(event) {
+    let display = document.getElementById("display-container");
+    if(lexx.offsetTop > display.offsetTop) {
+    lexx.style.top = lexx.offsetTop - 30 + "px";
     }
 });
+const down = document.querySelector('.key-down');
+down.addEventListener("mousedown", function(event) {
+    let display = document.getElementById("display-container");
+    if(lexx.offsetTop + lexx.offsetHeight < display.offsetHeight) {
+    lexx.style.top = lexx.offsetTop + 30 + "px";
+    }
+    
+});
+const fireBtn = document.querySelector('.key-fire');
+fireBtn.addEventListener("mousedown", function(event) {
+    createFireshot();
+});
+
+
+
 
 //fireshot create
 
@@ -53,7 +106,6 @@ function createFireshot() {
 
     
 }
-createPlanet()
 
 
 function fireshotMove(fireshot) {
@@ -67,11 +119,14 @@ function fireshotMove(fireshot) {
         if(fireshot.offsetLeft > display.clientWidth) {
             fireshot.remove();
             clearInterval(timerId);
+            
         }
     }, 25);
 }
+
+
 //isShot
-function isShot(fireshot, timer) {
+function isShot(fireshot, timer, count) {
     let topF = fireshot.offsetTop;
     let bottomF = fireshot.offsetTop + fireshot.offsetHeight;
 
@@ -90,6 +145,8 @@ function isShot(fireshot, timer) {
             clearInterval(planet.dataset.timer);
             setTimeout(function() {
                 planet.remove();
+                incScore();
+                fireshot.remove();
                 createPlanet();
                 clearInterval(timer);
             }, 1200)
@@ -98,41 +155,91 @@ function isShot(fireshot, timer) {
 
 }
 
+function isDie() {
+    let planet = document.querySelector('.planet');
+    let lexx = document.querySelector('.lexx');
+
+    let topL = lexx.offsetTop;
+    let bottomL = lexx.offsetTop + lexx.offsetHeight;
+
+    let topP = planet.offsetTop;
+    let bottomP = planet.offsetTop + planet.offsetHeight;
+
+    let leftL = lexx.offsetLeft + lexx.offsetWidth;
+    let leftP = planet.offsetLeft;
+
+    if(topL >= topP && bottomL <= bottomP && leftL >= leftP) {
+        planet.className = 'boom';
+        planet.style.top = topP + "px";
+        planet.style.left = leftP + "px"
+        clearInterval(planet.dataset.timer);
+            setTimeout(function() {
+                planet.remove();
+                die();
+                createPlanet();
+            }, 1000)
+    }
+}
 
 
+
+    
 //create Planet
-
 function createPlanet() {
     let planet = document.createElement("div");
     planet.className = "planet";
     
-
-    let display = document.getElementById("display-container");
+    let display = document.getElementById("lexx");
     let parentDiv = display.parentNode;
+
+    let displayContainer = document.getElementById("display-container");
+
+    planet.style.top = random(10, displayContainer.offsetHeight - 100) + "px";
+
+
     parentDiv.insertBefore(planet, display);
 
-    planet.style.top = random(1, display.offsetHeight - 10) + "px";
-
-    
     let timerId = setInterval(function() {
 
         planet.style.left = (planet.offsetLeft - 10) + "px";
 
-        
         if(planet.offsetLeft + planet.offsetWidth < 100) {
             planet.remove();
             clearInterval(timerId);
             createPlanet();
+
+            // die(); 
         }
+        isDie();
     }, 100);
     planet.dataset.timer = timerId;
     
 }
-
-//random 
+//random createPlanet
 function random(min, max) {
     let rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
 }
+
+function die() {
+    lives--;
+    if(lives != 0) {
+        let livesBlock = document.querySelector('#lives');
+        let live = livesBlock.querySelector("span");
+        live.remove();
+    }
+    else {
+        gameOver();
+    }
+    
+}
+function gameOver() {
+    document.body.innerHTML = 'game over';
+    location.reload();
+}
+
+
+
+
 
 
