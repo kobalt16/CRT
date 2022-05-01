@@ -93,6 +93,12 @@ down.addEventListener("mousedown", function(event) {
 });
 const fireBtn = document.querySelector('.key-fire');
 fireBtn.addEventListener("mousedown", function(event) {
+    audioBlast = document.querySelector('.blast')
+
+    fireBtn.addEventListener('click', e => {
+    fireBtn.classList.toggle('paused')
+    audioBlast.play()
+});
     createFireshot();
 });
 
@@ -115,10 +121,7 @@ function createFireshot() {
     
     fireshotMove(fireshot)
 
-    
 }
-
-
 function fireshotMove(fireshot) {
     let timerId = setInterval (function() {
         let display = document.getElementById("display-container");
@@ -140,8 +143,11 @@ function fireshotMove(fireshot) {
 function isShot(fireshot, timer, count) {
     let topF = fireshot.offsetTop;
     let bottomF = fireshot.offsetTop + fireshot.offsetHeight;
-
+    
     let planet = document.querySelector(".planet");
+    
+    
+    
     if(planet != null) {
         let topP = planet.offsetTop;
         let bottomP = planet.offsetTop + planet.offsetHeight;
@@ -155,11 +161,21 @@ function isShot(fireshot, timer, count) {
             planet.style.left = leftP + "px";
             clearInterval(planet.dataset.timer);
             setTimeout(function() {
-                planet.remove();
-                incScore();
-                fireshot.remove();
-                createPlanet();
-                clearInterval(timer);
+                if(score < 3) {
+                    planet.remove();
+                    incScore();
+                    fireshot.remove();
+                    createPlanet();
+                    clearInterval(timer);
+                } else {
+                    planet.remove();
+                    incScore();
+                    fireshot.remove();
+                    createPlanet2();
+                    createPlanet();
+                    clearInterval(timer);
+                }
+                
             }, 1200)
         }
     }
@@ -168,6 +184,31 @@ function isShot(fireshot, timer, count) {
 
 function isDie() {
     let planet = document.querySelector('.planet');
+    let lexx = document.querySelector('.lexx');
+
+    let topL = lexx.offsetTop;
+    let bottomL = lexx.offsetTop + lexx.offsetHeight;
+
+    let topP = planet.offsetTop;
+    let bottomP = planet.offsetTop + planet.offsetHeight;
+
+    let leftL = lexx.offsetLeft + lexx.offsetWidth;
+    let leftP = planet.offsetLeft;
+
+    if(topL >= topP && bottomL <= bottomP && leftL >= leftP) {
+        planet.className = 'boom';
+        planet.style.top = topP + "px";
+        planet.style.left = leftP + "px"
+        clearInterval(planet.dataset.timer);
+            setTimeout(function() {
+                planet.remove();
+                die();
+                createPlanet();
+            }, 1000)
+    }
+}
+function isDie2() {
+    let planet = document.querySelector('.planet2');
     let lexx = document.querySelector('.lexx');
 
     let topL = lexx.offsetTop;
@@ -226,6 +267,42 @@ function createPlanet() {
     planet.dataset.timer = timerId;
     
 }
+
+function createPlanet2() {
+    let planet = document.createElement("div");
+    planet.className = "planet2";
+    
+    let display = document.getElementById("lexx");
+    let parentDiv = display.parentNode;
+
+    let displayContainer = document.getElementById("display-container");
+
+    planet.style.top = random(10, displayContainer.offsetHeight - 100) + "px";
+
+
+    parentDiv.insertBefore(planet, display);
+
+    let timerId = setInterval(function() {
+
+        planet.style.left = (planet.offsetLeft - 20) + "px";
+
+        if(planet.offsetLeft + planet.offsetWidth < 100) {
+            planet.remove();
+            clearInterval(timerId);
+            createPlanet2();
+
+            // die(); 
+        }
+        isDie2();
+    }, 100);
+    planet.dataset.timer = timerId;
+    
+}
+
+
+
+
+
 //random createPlanet
 function random(min, max) {
     let rand = min + Math.random() * (max + 1 - min);
