@@ -16,6 +16,7 @@ a {
     display: flex;
     justify-content: center;
     color: rgb(238, 255, 0);
+    width: 90vw;
     text-shadow: 0px 1px 15px rgb(238, 255, 0);
     font-family: monospace;
 }
@@ -45,6 +46,7 @@ a {
     overflow: hidden;
     z-index: 3;
     /* overflow-y: scroll; */
+    z-index: 1;
     animation: display 10s;
 }
 @keyframes display {
@@ -55,9 +57,7 @@ a {
         opacity: 1;
     }
 }
-.display:none {
-    display: none;
-}
+
 .display-container::-webkit-scrollbar-thumb {
     background-color: rgba(125, 134, 0, 0.458);
 }
@@ -65,6 +65,28 @@ a {
     width: 6px;
     background-color: rgba(46, 46, 46, 0.71);
 }
+
+
+.initial-display {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    bottom: 247px;
+    left: 180px;
+    height: 87%;
+    width: 95%;
+    overflow: hidden;
+    z-index: 10;
+    background-color: rgb(18, 18, 18);
+}
+.start-text {
+    position: absolute;
+    font-size: 50px;
+    margin: 30%;
+}
+
+
+
 .text {
     display: flex;
     flex-direction: column;
@@ -202,19 +224,19 @@ a {
 
 .keys {
     display: flex;
-    position: absolute;
-    bottom: 4vh;
-    left: 5vw;
+    position: fixed;
     flex-direction: column;
-    width: 65px;
+    bottom: 4vh;
+    left: 4vh;
     height: 130px;
-    /* background-color: brown; */
+    width: 90%;
     z-index: 15;
 }
+
 .key-fire {
-    position: absolute;
+    position: fixed;
     bottom: 4vh;
-    right: 5vw;
+    right: 4vw;
     width: 48px;
     z-index: 15;
     transition: all .2s;
@@ -229,3 +251,18 @@ a {
     opacity: .2;
 }
 
+@media (max-width: 767.98px) {
+    body {
+        display: flex;
+        overflow: hidden;
+    }
+    .key-fire img {
+        width: 150px;
+    }
+    .key-up img {
+        width: 150px;
+    }
+    .key-down img {
+        width: 150px;
+    }
+}
