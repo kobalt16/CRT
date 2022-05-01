@@ -181,6 +181,17 @@ a {
     z-index: 50;
     transition: all .4s;
 }
+.planet2 {
+    position: absolute;
+    background-image: url("../img/planet2.png");
+    height: 50px;
+    width: 50px;
+    background-size: 50px 50px;
+    top: 120px;
+    left: 450px;
+    z-index: 50;
+    transition: all .4s;
+}
 .fireshot {
     position: absolute;
     width: 8px;
@@ -256,8 +267,14 @@ a {
         display: flex;
         overflow: hidden;
     }
+    .keys {
+        bottom: 20%;
+    }
+    .key-fire {
+        right: 20%;
+    }
     .key-fire img {
-        width: 150px;
+        width: 200px;
     }
     .key-up img {
         width: 150px;
