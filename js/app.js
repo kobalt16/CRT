@@ -314,6 +314,8 @@ function die() {
     if(lives != 0) {
         let livesBlock = document.querySelector('#lives');
         let live = livesBlock.querySelector("span");
+        audioBoom = document.querySelector('.audio-boom');
+        audioBoom.play();
         live.remove();
     }
     else {
