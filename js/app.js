@@ -31,9 +31,7 @@ drawScore();
 
 //create LEXX-------------------------------------------
 
-createLexx();
 
-createPlanet();
 
 
 function createLexx() {
@@ -64,6 +62,19 @@ function createLexx() {
         }
     });
 }
+
+    const start = document.querySelector('.initial-display');
+    start.addEventListener("mousedown", function(event) {
+    start.style.display = 'none';
+    createLexx();
+    createPlanet();
+})
+
+
+
+
+
+
 
 const upper = document.querySelector('.key-up');
 upper.addEventListener("mousedown", function(event) {
