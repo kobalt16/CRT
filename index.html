@@ -12,28 +12,33 @@
             <img src="./img/mon.png" alt="" class="monitor-im">
             <div class="display">
                 <div class="cover"></div>
+
                 <div class="display-container" id="display-container" >
+                    <div id="lives">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                     <div class="text">
-                        <h2>>:hello Let's go</h2>
-                        <!-- <textarea name="" id="" cols="45" rows="10" class="text-input"></textarea> -->
-                        <!-- <input type="text" size="45" rows="10" class="text-input"> -->
-                        <!-- <div class="button"><a href="">START</a></div> -->
+
+                        <div class="game-score" >
+                            >score: <span class="score-count">0</span>
+                        </div>
+                    </div>
+                    <div id="lexx" class="lexx"></div>
                         
-                    </div>
-                    <div id="lex">
-                        <img class="lexx" id="lexx" src="./img/lexx.png" alt="">
-                    </div>
-                    
-                    
                 </div>
                     
-                
-                
-                
             </div>
             <img src="./img/audiopic.png" alt="Alt" class="soundbutton paused">
             <audio class="audio" src="./media/music.mp3" loop></audio>
+            
         </div>
+        <div class="keys">
+            <div class="key-up"><img src="./img/up.png" alt=""></div>
+            <div class="key-down"><img src="./img/down.png" alt=""></div>
+        </div>
+        <div class="key-fire"><img src="./img/keyfire.png" alt=""></div>
     </div>
 
     <script src="https://unpkg.com/vue@3"></script>
